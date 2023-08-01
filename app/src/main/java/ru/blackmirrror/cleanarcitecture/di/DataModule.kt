@@ -1,18 +1,24 @@
 package ru.blackmirrror.cleanarcitecture.di
 
-import org.koin.dsl.module
+import android.content.Context
+import dagger.Module
+import dagger.Provides
 import ru.blackmirrror.cleanarcitecture.data.repository.UserRepositoryImpl
 import ru.blackmirrror.cleanarcitecture.data.storage.SharedPrefUserStorage
 import ru.blackmirrror.cleanarcitecture.data.storage.UserStorage
 import ru.blackmirrror.cleanarcitecture.domain.repository.UserRepository
 
-val dataModule = module {
+@Module
+class DataModule {
 
-    single<UserStorage> {
-        SharedPrefUserStorage(context = get())
+    @Provides
+    fun provideUserStorage(context: Context): UserStorage {
+        return SharedPrefUserStorage(context = context)
     }
 
-    single<UserRepository> {
-        UserRepositoryImpl(userStorage = get())
+    @Provides
+    fun provideUserRepository(userStorage: UserStorage): UserRepository {
+        return UserRepositoryImpl(userStorage = userStorage)
     }
+
 }
