@@ -1,15 +1,24 @@
 package ru.blackmirrror.cleanarcitecture.di
 
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import ru.blackmirrror.cleanarcitecture.domain.repository.UserRepository
 import ru.blackmirrror.cleanarcitecture.domain.usecases.GetUserNameUseCase
 import ru.blackmirrror.cleanarcitecture.domain.usecases.SaveUserNameUseCase
 
-val domainModule = module {
-    factory<GetUserNameUseCase> {
-        GetUserNameUseCase(userRepository = get())
+@Module
+@InstallIn(ViewModelComponent::class)
+class DomainModule {
+
+    @Provides
+    fun provideGetUserNameUseCase(userRepository: UserRepository): GetUserNameUseCase {
+        return GetUserNameUseCase(userRepository)
     }
 
-    factory<SaveUserNameUseCase> {
-        SaveUserNameUseCase(userRepository = get())
+    @Provides
+    fun provideSaveUserNameUseCase(userRepository: UserRepository): SaveUserNameUseCase {
+        return SaveUserNameUseCase(userRepository)
     }
 }

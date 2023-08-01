@@ -1,24 +1,19 @@
 package ru.blackmirrror.cleanarcitecture.presentaion
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import ru.blackmirrror.cleanarcitecture.R
-import ru.blackmirrror.cleanarcitecture.data.repository.UserRepositoryImpl
-import ru.blackmirrror.cleanarcitecture.data.storage.SharedPrefUserStorage
-import ru.blackmirrror.cleanarcitecture.domain.models.SaveUsernameParam
-import ru.blackmirrror.cleanarcitecture.domain.usecases.GetUserNameUseCase
-import ru.blackmirrror.cleanarcitecture.domain.usecases.SaveUserNameUseCase
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModel<MainViewModel>()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
